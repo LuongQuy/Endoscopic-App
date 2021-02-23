@@ -1,0 +1,192 @@
+<div class="top_panel" id="ui_top_panel">
+    <!-- menu bar -->
+    <div class="menubar">
+        <ul>
+            <li onclick="show_home_panel()" style="cursor:pointer;">Home</li>
+            
+            <!-- <li>Project
+                <ul>
+                    <li onclick="project_open_select_project_file()" title="Load a VIA project (from a JSON file)">
+                        Load</li>
+                    <li onclick="project_save_with_confirm()" title="Save this VIA project (as a JSON file)">Save
+                    </li>
+                    <li onclick="settings_panel_toggle()" title="Show/edit project settings">Settings</li>
+                    <li class="submenu_divider"></li>
+                    <li onclick="sel_local_images()" title="Add images locally stored in this computer">Add local
+                        files</li>
+                    <li onclick="project_file_add_url_with_input()"
+                        title="Add images from a web URL (e.g. http://www.robots.ox.ac.uk/~vgg/software/via/images/swan.jpg)">
+                        Add files from URL</li>
+                    <li onclick="project_file_add_abs_path_with_input()"
+                        title="Add images using absolute path of file (e.g. /home/abhishek/image1.jpg)">Add file
+                        using absolute path</li>
+                    <li onclick="sel_local_data_file('files_url')"
+                        title="Add images from a list of web url or absolute path stored in a text file (one url or path per line)">
+                        Add url or path from text file</li>
+                    <li onclick="project_file_remove_with_confirm()"
+                        title="Remove selected file (i.e. file currently being shown)">Remove file</li>
+                    <li class="submenu_divider"></li>
+                    <li onclick="sel_local_data_file('attributes')"
+                        title="Import region and file attributes from a JSON file">Import region/file attributes
+                    </li>
+                    <li onclick="project_save_attributes()" title="Export region and file attributes to a JSON file">
+                        Export region/file attributes</li>
+                </ul>
+            </li> -->
+
+            <li>View
+                <ul>
+                    <li onclick="image_grid_toggle()" title="Toggle between single image view and image grid view">
+                        Đóng mở grid view</li>
+                    <li onclick="leftsidebar_toggle()" title="Show or hide the sidebar shown in left hand side">
+                        Đóng mở sidebar</li>
+                    <li onclick="toggle_img_fn_list_visibility()"
+                        title="Show or hide a panel to update annotations corresponding to file and region">Đóng mở danh sách file</li>
+                    <li class="submenu_divider"></li>
+                    <!-- <li onclick="toggle_attributes_editor()"
+                        title="Show or hide a panel to update file and region attributes">Toggle attributes editor
+                    </li> -->
+                    <!-- <li onclick="annotation_editor_toggle_all_regions_editor()"
+                        title="Show or hide a panel to update annotations corresponding to file and region">Toggle
+                        annotation editor (Space)</li> -->
+                    <li class="submenu_divider"></li>
+                    <li onclick="toggle_region_boundary_visibility()" title="Show or hide the region boundaries">
+                        Hiển thị/Ẩn khoanh vùng (Phím tắt: b)</li>
+                    <!-- <li onclick="toggle_region_id_visibility()" title="Show or hide the region id labels">Show/hide
+                        region labels (l)</li> -->
+                    <!-- <li onclick="toggle_region_info_visibility()" title="Show or hide the image coordinates">
+                        Show/hide region info.</li> -->
+                </ul>
+            </li>
+
+            <li>Help
+                <ul>
+                    <li onclick="set_display_area_content(VIA_DISPLAY_AREA_CONTENT_NAME.PAGE_GETTING_STARTED)"
+                        title="Show a guide to get started with this application">Hướng dẫn</li>
+                </ul>
+            </li>
+
+            <li>More
+                <ul>
+                    <!-- <li onclick="download_all_region_data('csv')" title="Export annotations to a CSV file">Export
+                        Annotations (as csv)</li>
+                    <li onclick="download_all_region_data('json')" title="Export annotaitons to a JSON file">Export
+                        Annotations (as json)</li>
+                    <li onclick="download_all_region_data('coco', 'json')"
+                        title="Export annotaitons to COCO (http://cocodataset.org) format">Export Annotations (COCO
+                        format)</li>
+                    <li onclick="" class="submenu_divider"></li>
+                    <li onclick="sel_local_data_file('annotations')" title="Import annotations from a CSV file">
+                        Import Annotations (from csv)</li>
+                    <li onclick="sel_local_data_file('annotations')" title="Import annotations from a JSON file">
+                        Import Annotations (from json)</li>
+                    <li onclick="sel_local_data_file('annotations_coco')"
+                        title="Import annotations from a COCO (http://cocodataset.org) formatted JSON file">Import
+                        Annotations (COCO format)</li>
+
+                    <li class="submenu_divider"></li>
+                    <li onclick="show_annotation_data()"
+                        title="Show a preview of annotations (opens in a new browser windows)">Preview Annotations
+                    </li> -->
+                    <li onclick="download_as_image()" title="Download an image containing the annotations">Download
+                        ảnh đã khoanh vùng</li>
+                </ul>
+            </li>
+        </ul>
+    </div> <!-- end of menubar -->
+
+    <!-- Shortcut toolbar -->
+    <div class="toolbar">
+        <!-- <svg onclick="project_open_select_project_file()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_open"></use>
+            <title>Open Project</title>
+        </svg>
+        <svg onclick="project_save_with_confirm()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_save"></use>
+            <title>Save Project</title>
+        </svg>
+        <svg onclick="settings_panel_toggle()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_settings"></use>
+            <title>Update Project Settings</title>
+        </svg> -->
+        <!--
+    <svg onclick="" viewbox="0 0 24 24"><use xlink:href="#icon_checkbox"></use><title>Locate Files</title></svg>
+    -->
+
+        <!-- <svg onclick="sel_local_data_file('annotations')" style="margin-left:1rem;" viewbox="0 0 24 24">
+            <use xlink:href="#icon_fileupload"></use>
+            <title>Import Annotations from CSV</title>
+        </svg>
+        <svg onclick="download_all_region_data('csv')" viewbox="0 0 24 24">
+            <use xlink:href="#icon_filedownload"></use>
+            <title>Download Annotations as CSV</title>
+        </svg> -->
+
+        <svg onclick="image_grid_toggle()" id="toolbar_image_grid_toggle" style="margin-left:1rem;" viewbox="0 0 24 24">
+            <use xlink:href="#icon_gridon"></use>
+            <title>Switch to Image Grid View</title>
+        </svg>
+        <!-- <svg onclick="annotation_editor_toggle_all_regions_editor()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_insertcomment"></use>
+            <title>Toggle Annotation Editor</title>
+        </svg> -->
+
+        <svg onclick="move_to_prev_image()" style="margin-left:1rem;" viewbox="0 0 24 24">
+            <use xlink:href="#icon_prev"></use>
+            <title>Previous</title>
+        </svg>
+        <svg onclick="toggle_img_fn_list_visibility()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_list"></use>
+            <title>Toggle Filename List</title>
+        </svg>
+        <svg onclick="move_to_next_image()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_next"></use>
+            <title>Next</title>
+        </svg>
+
+        <svg onclick="zoom_in()" style="margin-left:1rem;" viewbox="0 0 24 24">
+            <use xlink:href="#icon_zoomin"></use>
+            <title>Zoom In</title>
+        </svg>
+        <svg onclick="zoom_out()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_zoomout"></use>
+            <title>Zoom Out</title>
+        </svg>
+
+        <svg onclick="sel_all_regions()" viewbox="0 0 24 24" style="margin-left:1rem;">
+            <use xlink:href="#icon_selectall"></use>
+            <title>Select All Regions</title>
+        </svg>
+        <svg onclick="copy_sel_regions()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_copy"></use>
+            <title>Copy Regions</title>
+        </svg>
+        <svg onclick="paste_sel_regions_in_current_image()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_paste"></use>
+            <title>Paste Regions</title>
+        </svg>
+        <svg onclick="paste_to_multiple_images_with_confirm()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_pasten"></use>
+            <title>Paste Region in Multiple Images</title>
+        </svg>
+        <!-- <svg onclick="del_sel_regions_with_confirm()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_pasteundo"></use>
+            <title>Undo Regions Pasted in Multiple Images</title>
+        </svg> -->
+        <svg onclick="del_sel_regions()" viewbox="0 0 24 24">
+            <use xlink:href="#icon_close"></use>
+            <title>Delete Region</title>
+        </svg>
+        <a href="/account" class="btn-account"><svg viewbox="0 0 20 20">
+            <use xlink:href="#icon_account"></use>
+            <title>Tài khoản</title>
+        </svg></a>
+        <a href="/logout" class="btn-logout"><svg viewbox="0 0 20 20">
+            <use xlink:href="#icon_logout"></use>
+            <title>Đăng xuất</title>
+        </svg></a>
+        
+    </div>
+    <!-- end of shortcut toolbar -->
+    <input type="file" id="invisible_file_input" name="files[]" style="display:none">
+</div> <!-- endof #top_panel -->

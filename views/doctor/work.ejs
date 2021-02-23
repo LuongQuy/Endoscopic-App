@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Endoscopic App</title>
+    <link rel="stylesheet" type="text/css" href="css/via.css">
+    <link rel="stylesheet" type="text/css" href="css/doctor.css">
+</head>
+
+<body onload="_via_init()" onresize="_via_update_ui_components()">
+    
+    <%- include('components/svg_shape') %>
+
+    <!-- used by invoke_with_user_inputs() to gather user inputs -->
+    <div id="user_input_panel"></div>
+
+    <!-- to show status messages -->
+    <div id="message_panel">
+        <div id="message_panel_content" class="content"></div>
+    </div>
+
+    <%- include('components/annotation_editor_panel') %>
+
+    <%- include('components/top_panel') %>
+
+    <%- include('components/middle_panel') %>
+
+    <!-- this vertical spacer is needed to allow scrollbar to show
+         items like Keyboard Shortcut hidden under the attributes panel -->
+    <div style="width: 100%;" id="vertical_space"></div>
+
+    <!-- DEMO SCRIPT AUTOMATICALLY INSERTED BY VIA PACKER SCRIPT -->
+    <script src="js/via.js"></script>
+    <script>
+        var data = ["images/demo/HMUH_02 190000_190300_BN001_136.jpg",
+                    "images/demo/HMUH_02 190000_190300_BN001_139.jpg",
+                    "images/demo/HMUH_02 190000_190300_BN001_140.jpg",
+                    "images/demo/HMUH_02 190000_190400_BN001_082.jpg",
+                    "images/demo/HMUH_02 190000_190400_BN001_089.jpg"
+                ]
+        data = data.join("\n")
+        import_files_url_from_csv(data)
+        // _via_show_img(_via_image_filename_list[0])
+    </script>
+</body>
+
+</html>

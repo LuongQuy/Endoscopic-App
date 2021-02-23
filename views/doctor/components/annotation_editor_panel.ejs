@@ -1,0 +1,24 @@
+<!-- spreadsheet like editor for annotations -->
+<div id="annotation_editor_panel">
+    <div class="button_panel">
+        <span class="text_button" onclick="edit_region_metadata_in_annotation_editor()" id="button_edit_region_metadata"
+            title="Manual annotations of regions">Region Annotations</span>
+        <span class="text_button" onclick="edit_file_metadata_in_annotation_editor()" id="button_edit_file_metadata"
+            title="Manual annotations of a file">File Annotations</span>
+
+        <span class="button" style="float:right;margin-right:0.2rem;"
+            onclick="annotation_editor_toggle_all_regions_editor()"
+            title="Close this window of annotation editor">&times;</span>
+        <span class="button" style="float:right;margin-right:0.2rem;"
+            onclick="annotation_editor_increase_panel_height()" title="Increase the height of this panel">&uarr;</span>
+        <span class="button" style="float:right;margin-right:0.2rem;"
+            onclick="annotation_editor_decrease_panel_height()" title="Decrease the height of this panel">&darr;</span>
+        <span class="button" style="float:right;margin-right:0.2rem;"
+            onclick="annotation_editor_increase_content_size()"
+            title="Increase size of contents in annotation editor">&plus;</span>
+        <span class="button" style="float:right;margin-right:0.2rem;"
+            onclick="annotation_editor_decrease_content_size()"
+            title="Decrease size of contents in annotation editor">&minus;</span>
+    </div>
+    <!-- here, a child div with id="annotation_editor" is added by javascript -->
+</div>

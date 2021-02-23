@@ -1,0 +1,236 @@
+<div id="leftsidebar">
+    <div class="leftsidebar_accordion_panel show" style="float:right; border:2px solid #f2f2f2;">
+        <span class="text_button" onclick="leftsidebar_decrease_width()"
+            title="Reduce width of this toolbar panel">&larr;</span>
+        <span class="text_button" onclick="leftsidebar_increase_width()"
+            title="Increase width of this toolbar panel">&rarr;</span>
+        <span class="text_button" onclick="leftsidebar_toggle()" title="Show/hide this toolbar panel">&ltrif;</span>
+    </div>
+
+    <button class="leftsidebar_accordion active">Hình dạng vùng</button>
+    <div class="leftsidebar_accordion_panel show">
+        <ul class="region_shape">
+            <li id="region_shape_rect" class="selected" onclick="select_region_shape('rect')"
+                title="Rectangle (Shortcut key 1)"><svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_rectangle"></use>
+                </svg></li>
+            <li id="region_shape_circle" onclick="select_region_shape('circle')" title="Circle (Shortcut key 2)">
+                <svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_circle"></use>
+                </svg>
+            </li>
+            <li id="region_shape_ellipse" onclick="select_region_shape('ellipse')" title="Ellipse (Shortcut key 3)">
+                <svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_ellipse"></use>
+                </svg>
+            </li>
+            <li id="region_shape_polygon" onclick="select_region_shape('polygon')" title="Polygon (Shortcut key 4)">
+                <svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_polygon"></use>
+                </svg>
+            </li>
+            <li id="region_shape_point" onclick="select_region_shape('point')" title="Point (Shortcut key 5)">
+                <svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_point"></use>
+                </svg>
+            </li>
+            <li id="region_shape_polyline" onclick="select_region_shape('polyline')" title="Polyline (Shortcut key 6)">
+                <svg height="32" viewbox="0 0 32 32">
+                    <use xlink:href="#shape_polyline"></use>
+                </svg>
+            </li>
+        </ul>
+        <div id="region_info" class="display_none">&nbsp;</div>
+    </div>
+
+    <!-- Attributes -->
+    <button class="leftsidebar_accordion active" id="attributes_editor_panel_title">Chẩn đoán</button>
+    <div class="leftsidebar_accordion_panel show" id="attributes_editor_panel">
+        <!-- <div class="button_panel" style="padding:1rem 0;">
+            <span class="text_button" onclick="show_region_attributes_update_panel()"
+                id="button_show_region_attributes" title="Show region attributes">Region Attributes</span>
+            <span class="text_button" onclick="show_file_attributes_update_panel()" id="button_show_file_attributes"
+                title="Show file attributes">File Attributes</span>
+        </div> -->
+        <div id="attributes_update_panel">
+            <!-- <div class="button_panel">
+                <input style="width:70%" type="text" placeholder="attribute name" id="user_input_attribute_id" value="">
+                <span id="button_add_new_attribute" class="button" onclick="add_new_attribute_from_user_input()"
+                    title="Add new attribute">&plus;</span>
+                <span id="button_del_attribute" class="button" onclick="delete_existing_attribute_with_confirm()"
+                    title="Delete existing attribute">&minus;</span>
+            </div> -->
+            <!-- <div class="button_panel" style="margin:0.1rem 0;">
+                <select style="width:100%" id="attributes_name_list" onchange="update_current_attribute_id(this)"
+                    title="List of existing attributes"></select>
+            </div> -->
+            <div id="attribute_properties">
+                <div class="property"><span title="Attribute type (e.g. text, checkbox, radio, etc)">Loại
+                        ảnh</span><span><select onchange="attribute_property_on_update(this)" id="attribute_type">
+                            <option value="text" selected="selected">Ảnh bình thường</option>
+                            <option value="checkbox">Ảnh viêm</option>
+                        </select></span></div>
+
+                <div class="property"><span title="Attribute type (e.g. text, checkbox, radio, etc)">Mức
+                        độ</span><span><select onchange="attribute_property_on_update(this)" id="attribute_type">
+                            <option value="text" selected="selected">1</option>
+                            <option value="text">2</option>
+                            <option value="text">3</option>
+                        </select></span></div>
+                <!-- <div class="property"><span
+                        title="Name of attribute (appears in exported annotations)">Name</span><span><input
+                            onchange="attribute_property_on_update(this)" value="a" id="attribute_name"></span>
+                </div> -->
+                <!-- <div class="property"><span
+                        title="Description of attribute (shown to user during annotation session)">Desc.</span><span><input
+                            onchange="attribute_property_on_update(this)" value="" id="attribute_description"></span>
+                </div>
+                <div class="property"><span title="Default value of this attribute">Def.</span><span><input
+                            onchange="attribute_property_on_update(this)" value="" id="attribute_default_value"></span>
+                </div> -->
+
+            </div>
+            <div id="attribute_options"></div>
+            <!-- <p style="text-align:center">
+                <span class="text_button" title="Show a spreadsheet like editor for all manual annotations"
+                    onclick="annotation_editor_toggle_all_regions_editor()">Toggle Annotation Editor</span>
+            </p> -->
+        </div>
+    </div>
+
+    <!-- Project -->
+    <button class="leftsidebar_accordion active" id="project_panel_title">Ảnh nội soi</button>
+    <div class="leftsidebar_accordion_panel show" id="img_fn_list_panel">
+        <div id="project_info_panel">
+            <div class="row">
+                <span class="col"><label for="project_name">Ngày: </label></span>
+                <span class="col"><input type="text" value="" onchange="project_on_name_update(this)" id="project_name"
+                        title="VIA project name"></span>
+            </div>
+        </div>
+        <div id="project_tools_panel">
+            <div class="button_panel" style="margin:0.1rem 0; display: none">
+                <select style="width:48%" id="filelist_preset_filters_list"
+                    onchange="img_fn_list_onpresetfilter_select()" title="Filter file list using predefined filters">
+                    <!-- <option value="all">All files</option> -->
+                    <!-- <option value="files_without_region">Show files without regions</option> -->
+                    <!-- <option value="files_missing_region_annotations">Show files missing region annotations -->
+                    <!-- </option> -->
+                    <!-- <option value="files_missing_file_annotations">Show files missing file annotations</option> -->
+                    <!-- <option value="files_error_loading">Files that could not be loaded</option> -->
+                    <option value="regex">Regular Expression</option>
+                </select>
+                <input style="width:50%" type="text" placeholder="regular expression" oninput="img_fn_list_onregex()"
+                    id="img_fn_list_regex" title="Filter using regular expression">
+            </div>
+        </div>
+        <div id="img_fn_list"></div>
+        <p>
+        <div class="button_panel">
+            <!-- <span class="button" onclick="sel_local_images()" title="Add new file from local disk">Ảnh trước đó</span>
+            <span class="button" onclick="project_file_add_url_with_input()" title="Add new file using URL">Ảnh tiếp theo</span> -->
+            <!-- <span class="button" onclick="project_file_remove_with_confirm()"
+                title="Remove selected file (i.e. file currently being shown) from project">Remove</span> -->
+            <span class="button" onclick="move_to_prev_image()" title="Add new file from local disk">Ảnh trước đó</span>
+            <span class="button" onclick="move_to_next_image()" title="Add new file using URL">Ảnh tiếp
+                theo</span>
+        </div>
+        </p>
+    </div>
+
+    <button class="leftsidebar_accordion">Phím tắt</button>
+    <div class="leftsidebar_accordion_panel">
+        <div style="display:block; text-align:center; padding:1rem;">Các phím tắt cho khoanh vùng tổn thương</div>
+        <table>
+            <tr>
+                <td style="width:8em;"><span class="key">&larr;</span>&nbsp;<span class="key">&uarr;</span>&nbsp;<span
+                        class="key">&rarr;</span>&nbsp;<span class="key">&darr;</span></td>
+                <td>Di chuyển vùng được chọn đi 1px</td>
+            </tr>
+            <tr>
+                <td><span class="key">a</span></td>
+                <td>Chọn tất cả vùng</td>
+            </tr>
+
+            <tr>
+                <td><span class="key">c</span></td>
+                <td>Sao chép vùng được chọn</td>
+            </tr>
+            <tr>
+                <td><span class="key">v</span></td>
+                <td>Dán vùng đã sao chép</td>
+            </tr>
+            <tr>
+                <td><span class="key">d</span></td>
+                <td>Xóa vùng được chọn</td>
+            </tr>
+            <tr>
+                <td><span class="key">Ctrl</span> + Wheel</td>
+                <td>Zoom in/out (Lưu ý: Di chuyển chuột vào khu vực ảnh)</td>
+            </tr>
+            <!-- <tr>
+                <td><span class="key">l</span></td>
+                <td>Toggle region label</td>
+            </tr> -->
+            <!-- <tr>
+                <td><span class="key">b</span></td>
+                <td>Toggle region boundary</td>
+            </tr> -->
+            <tr>
+                <td><span class="key">Enter</span></td>
+                <td>Kết thúc quá trình khoanh vùng</td>
+            </tr>
+            <tr>
+                <td><span class="key">Backspace</span></td>
+                <td>Xóa đỉnh cuối cùng của vùng đa giác</td>
+            </tr>
+        </table>
+
+        <div style="display:block; text-align:center; padding:1rem;">Các phím tắt khác</div>
+        <table>
+            <tr>
+                <td style="width:8em;"><span class="key">&larr;</span>&nbsp;<span class="key">&rarr;</span></td>
+                <td>Di chuyển đến ảnh sau hoặc ảnh trước đó</td>
+            </tr>
+            <tr>
+                <td><span class="key">+</span>&nbsp;<span class="key">-</span>&nbsp;<span class="key">=</span>
+                </td>
+                <td>Zoom in/out/reset</td>
+            </tr>
+            <!-- <tr>
+                <td><span class="key">&uarr;</span></td>
+                <td>Update region label</td>
+            </tr>
+            <tr>
+                <td><span class="key">&darr;</span></td>
+                <td>Update region colour</td>
+            </tr>
+            <tr>
+                <td><span class="key">Spacebar</span></td>
+                <td>Toggle annotation editor (Ctrl to toggle on image editor)</td>
+            </tr>
+            <tr>
+                <td><span class="key">Home</span> / <span class="key">h</span></td>
+                <td>Jump to first image</td>
+            </tr>
+            <tr>
+                <td><span class="key">End</span> / <span class="key">e</span></td>
+                <td>Jump to last image</td>
+            </tr>
+            <tr>
+                <td><span class="key">PgUp</span> / <span class="key">u</span></td>
+                <td>Jump several images</td>
+            </tr>
+            <tr>
+                <td><span class="key">PgDown</span> / <span class="key">d</span></td>
+                <td>Jump several images</td>
+            </tr> -->
+
+            <!-- <tr>
+                <td><span class="key">Esc</span></td>
+                <td>Cancel ongoing task</td>
+            </tr> -->
+        </table>
+    </div>
+
+</div> <!-- end of leftsidebar -->

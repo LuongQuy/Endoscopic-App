@@ -1,0 +1,103 @@
+<!-- Middle Panel contains a left-sidebar and image display areas -->
+<div class="middle_panel">
+    <!-- this panel contains a button to shows the left side bar -->
+    <div id="leftsidebar_collapse_panel">
+        <span class="text_button" onclick="leftsidebar_toggle()" title="Show left sidebar">&rtrif;</span>
+    </div>
+
+    <%- include('leftsidebar') %>
+
+    <!-- Main display area: contains image canvas, ... -->
+    <div id="display_area">
+        <div id="image_panel" class="display_area_content display_none">
+            <!-- buffer images using <img> element will be added here -->
+
+            <!-- @todo: in future versions, this canvas will be replaced by a <svg> element -->
+            <canvas id="region_canvas" width="1" height="1" tabindex="1">Sorry, your browser does not support HTML5
+                Canvas functionality which is required for this application.</canvas>
+            <!-- here, a child div with id="annotation_editor" is added by javascript -->
+        </div>
+        <div id="image_grid_panel" class="display_area_content display_none">
+
+            <div id="image_grid_group_panel">
+                <span class="tool">Group by&nbsp; <select id="image_grid_toolbar_group_by_select"
+                        onchange="image_grid_toolbar_onchange_group_by_select(this)"></select></span>
+            </div>
+
+            <div id="image_grid_toolbar">
+                <span>Selected</span>
+                <span id="image_grid_group_by_sel_img_count">0</span>
+                <span>of</span>
+                <span id="image_grid_group_by_img_count">0</span>
+                <span>images in current group, show</span>
+
+                <span>
+                    <select id="image_grid_show_image_policy" onchange="image_grid_onchange_show_image_policy(this)">
+                        <option value="all">all images (paginated)</option>
+                        <option value="first_mid_last">only first, middle and last image</option>
+                        <option value="even_indexed">even indexed images (i.e. 0,2,4,...)</option>
+                        <option value="odd_indexed">odd indexed images (i.e. 1,3,5,...)</option>
+                        <option value="gap5">images 1, 5, 10, 15,...</option>
+                        <option value="gap25">images 1, 25, 50, 75, ...</option>
+                        <option value="gap50">images 1, 50, 100, 150, ...</option>
+                    </select>
+                </span>
+
+                <div id="image_grid_nav"></div>
+            </div>
+
+            <div id="image_grid_content">
+                <div id="image_grid_content_img"></div>
+                <svg xmlns:xlink="http://www.w3.org/2000/svg" id="image_grid_content_rshape"></svg>
+            </div>
+
+            <div id="image_grid_info">
+            </div>
+        </div> <!-- end of image grid panel -->
+
+        <div id="page_404" class="display_area_content display_none narrow_page_content">
+            <h2>File Not Found</h2>
+            <p>Filename: <span style="font-family:Mono;" id="page_404_filename"></span></p>
+
+            <p>We recommend that you update the default path in <span class="text_button" title="Show Project Settings"
+                    onclick="settings_panel_toggle()">project settings</span> to the
+                folder which contains this image.</p>
+
+            <p>A temporary fix is to use <span class="text_button" title="Load or Add Images"
+                    onclick="sel_local_images()">browser's file selector</span> to manually locate and add this
+                file. We do not recommend this approach because it requires you to repeat this process every time
+                your load this project in the VIA application.</p>
+        </div> <!-- end of file not found panel -->
+
+        <div id="page_start_info" class="display_area_content display_none narrow_page_content">
+            <h3 style="text-align:center">Hướng dẫn</h5>
+            <ul>
+                <li>Chọn ảnh bên mục "Ảnh nội soi" để bắt đầu chẩn đoán từng ảnh.</li>
+                <li>Mỗi ngày sẽ có 30 ảnh cần chẩn đoán.</li>
+                <li>Mỗi ảnh cần chẩn đoán là ảnh bình thường hoặc ảnh viêm và đánh giá mức độ nhận biết.</li>
+                <li>Nếu là ảnh viêm cần khoanh vùng bị tổn thương.</li>
+                <li>Ấn vào nút "Ảnh tiếp theo" để chuyển sang ảnh mới. Trạng thái ảnh trước đó sẽ được tự động lưu lại.</li>
+                <li>Có thể sử dụng các phím tắt được liệt kê trong phần phím tắt để thao tác nhanh hơn.</li>
+            </ul>
+
+        </div>
+
+        <div id="page_getting_started" class="display_area_content display_none narrow_page_content">
+            <h3 style="text-align:center">Hướng dẫn</h5>
+            <ul>
+                <li>Chọn ảnh bên mục "Ảnh nội soi" để bắt đầu chẩn đoán từng ảnh.</li>
+                <li>Mỗi ngày sẽ có 30 ảnh cần chẩn đoán.</li>
+                <li>Mỗi ảnh cần chẩn đoán là ảnh bình thường hoặc ảnh viêm và đánh giá mức độ nhận biết.</li>
+                <li>Nếu là ảnh viêm cần khoanh vùng bị tổn thương.</li>
+                <li>Ấn vào nút "Ảnh tiếp theo" để chuyển sang ảnh mới. Trạng thái ảnh trước đó sẽ được tự động lưu lại.</li>
+                <li>Có thể sử dụng các phím tắt được liệt kê trong phần phím tắt để thao tác nhanh hơn.</li>
+            </ul>
+        </div>
+
+        <div id="page_load_ongoing" class="display_area_content narrow_page_content">
+            <div style="text-align:center">
+                <div style="margin-top:4rem">Loading ...</div>
+            </div>
+        </div>
+    </div> <!-- end of display_area -->
+</div> <!-- end of middle_panel -->

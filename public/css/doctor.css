@@ -1,0 +1,10 @@
+.btn-logout {
+  position: absolute;
+  right: 15px;
+  font-weight: bold;
+}
+.btn-account {
+  position: absolute;
+  right: 50px;
+  font-weight: 100;
+}
