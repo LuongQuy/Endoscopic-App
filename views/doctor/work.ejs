@@ -6,6 +6,7 @@
     <title>Endoscopic App</title>
     <link rel="stylesheet" type="text/css" href="css/via.css">
     <link rel="stylesheet" type="text/css" href="css/doctor.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body onload="_via_init()" onresize="_via_update_ui_components()">
@@ -26,18 +27,29 @@
 
     <%- include('components/middle_panel') %>
 
+    <%- include('components/take_note_modal') %>
+
     <!-- this vertical spacer is needed to allow scrollbar to show
          items like Keyboard Shortcut hidden under the attributes panel -->
     <div style="width: 100%;" id="vertical_space"></div>
 
     <!-- DEMO SCRIPT AUTOMATICALLY INSERTED BY VIA PACKER SCRIPT -->
     <script src="js/via.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="js/app.js"></script>
     <script>
-        var data = ["images/demo/HMUH_02 190000_190300_BN001_136.jpg",
-                    "images/demo/HMUH_02 190000_190300_BN001_139.jpg",
-                    "images/demo/HMUH_02 190000_190300_BN001_140.jpg",
-                    "images/demo/HMUH_02 190000_190400_BN001_082.jpg",
-                    "images/demo/HMUH_02 190000_190400_BN001_089.jpg"
+        var data = ["images/demo/HMUH_03 190701_190717_BN001_006.jpg",
+                    "images/demo/HMUH_03 190701_190717_BN001_021.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_001.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_002.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_007.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_010.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_012.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_023.jpg",
+                    "images/demo/HMUH_03 190701_190718_BN001_025.jpg",
+                    "images/demo/HMUH_03 190701_190720_BN001_009.jpg"
                 ]
         data = data.join("\n")
         import_files_url_from_csv(data)

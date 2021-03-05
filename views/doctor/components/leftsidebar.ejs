@@ -65,18 +65,19 @@
                     title="List of existing attributes"></select>
             </div> -->
             <div id="attribute_properties">
-                <div class="property"><span title="Attribute type (e.g. text, checkbox, radio, etc)">Loại
-                        ảnh</span><span><select onchange="attribute_property_on_update(this)" id="attribute_type">
-                            <option value="text" selected="selected">Ảnh bình thường</option>
-                            <option value="checkbox">Ảnh viêm</option>
+                <div class="property"><span title="">Loại
+                        ảnh</span><span><select id="img_type">
+                            <option value="normal" selected="selected">Ảnh bình thường</option>
+                            <option value="not_normal">Ảnh viêm</option>
                         </select></span></div>
 
-                <div class="property"><span title="Attribute type (e.g. text, checkbox, radio, etc)">Mức
-                        độ</span><span><select onchange="attribute_property_on_update(this)" id="attribute_type">
+                <div class="property" id="div_img_level"><span title="Mức độ nhận biết của ảnh viêm (1 là kém nhất, 10 là tốt nhất)">Mức
+                        độ</span><span><select id="img_level">
                             <option value="text" selected="selected">1</option>
                             <option value="text">2</option>
                             <option value="text">3</option>
                         </select></span></div>
+
                 <!-- <div class="property"><span
                         title="Name of attribute (appears in exported annotations)">Name</span><span><input
                             onchange="attribute_property_on_update(this)" value="a" id="attribute_name"></span>
@@ -88,9 +89,12 @@
                 <div class="property"><span title="Default value of this attribute">Def.</span><span><input
                             onchange="attribute_property_on_update(this)" value="" id="attribute_default_value"></span>
                 </div> -->
-
+                
             </div>
-            <div id="attribute_options"></div>
+            <div class="button_panel">
+                <span class="button" title="Thêm ghi chú cho ảnh" data-toggle="modal" data-target="#take_note_modal">Thêm ghi chú</span>
+            </div>
+            <!-- <div id="attribute_options"></div> -->
             <!-- <p style="text-align:center">
                 <span class="text_button" title="Show a spreadsheet like editor for all manual annotations"
                     onclick="annotation_editor_toggle_all_regions_editor()">Toggle Annotation Editor</span>
@@ -101,26 +105,25 @@
     <!-- Project -->
     <button class="leftsidebar_accordion active" id="project_panel_title">Ảnh nội soi</button>
     <div class="leftsidebar_accordion_panel show" id="img_fn_list_panel">
-        <div id="project_info_panel">
+        <!-- <div id="project_info_panel" style="margin-left:0;">
             <div class="row">
-                <span class="col"><label for="project_name">Ngày: </label></span>
-                <span class="col"><input type="text" value="" onchange="project_on_name_update(this)" id="project_name"
-                        title="VIA project name"></span>
+                <span class="col"><label style="font-weight: bold;" for="project_name" id="project_name"></label></span>
             </div>
-        </div>
+        </div> -->
         <div id="project_tools_panel">
-            <div class="button_panel" style="margin:0.1rem 0; display: none">
-                <select style="width:48%" id="filelist_preset_filters_list"
+            <div class="button_panel" style="margin:0.1rem 0;">
+                <span class="col" style="width: 50%; padding:0"><label style="font-weight: bold;" for="project_name" id="project_name"></label></span>
+                <select class="float-right" style="width:50%;" id="filelist_preset_filters_list"
                     onchange="img_fn_list_onpresetfilter_select()" title="Filter file list using predefined filters">
-                    <!-- <option value="all">All files</option> -->
-                    <!-- <option value="files_without_region">Show files without regions</option> -->
-                    <!-- <option value="files_missing_region_annotations">Show files missing region annotations -->
-                    <!-- </option> -->
+                    <option value="all">Tất cả ảnh</option>
+                    <option value="files_without_region">Các ảnh chưa khoanh vùng</option>
+                    <!-- <option value="files_missing_region_annotations">Show files missing region annotations
+                    </option> -->
                     <!-- <option value="files_missing_file_annotations">Show files missing file annotations</option> -->
-                    <!-- <option value="files_error_loading">Files that could not be loaded</option> -->
-                    <option value="regex">Regular Expression</option>
+                    <option value="files_error_loading">Các ảnh không tải được</option>
+                    <!-- <option value="regex">Regular Expression</option> -->
                 </select>
-                <input style="width:50%" type="text" placeholder="regular expression" oninput="img_fn_list_onregex()"
+                <input style="width:50%; display: none" type="text" placeholder="regular expression" oninput="img_fn_list_onregex()"
                     id="img_fn_list_regex" title="Filter using regular expression">
             </div>
         </div>
