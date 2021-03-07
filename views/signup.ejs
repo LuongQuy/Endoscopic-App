@@ -8,6 +8,8 @@
     <title>Sign Up</title>
     <link href="css/bootstrap4.0.0.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -17,46 +19,66 @@
             <div class="row">
                 <div class="col-md-4 login-sec">
                     <h2 class="text-center">Sign Up Now</h2>
-                    <% if(typeof message != 'undefined' && message.length > 0){ %> 
+                    <% if(typeof message !='undefined' && message.length> 0){ %>
                         <div class="alert alert-danger">
-                                <strong>Lỗi!</strong> <%= message %>
+                            <strong>Lỗi!</strong>
+                            <%= message %>
                         </div>
-                    <% } %>
-                    <form class="login-form" method="POST">
-                        <div class="form-group">
-                            <label for="email" class="text-uppercase">Email</label>
-                            <input name="email" type="email" class="form-control" placeholder="" value="luongquy.vnu@gmail.com">
+                        <% } %>
+                            <form class="login-form" method="POST">
+                                <div class="form-group">
+                                    <label for="email" class="text-uppercase">Email</label>
+                                    <input name="email" type="email" class="form-control" placeholder=""
+                                        value="luongquy.vnu@gmail.com">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                            <input name="password" type="password" class="form-control" placeholder="" value="12345">
-                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="text-uppercase">Password</label>
+                                    <input name="password" type="password" class="form-control" placeholder=""
+                                        value="12345">
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="exampleInputPassword1" class="text-uppercase">Chọn ngày</label> -->
+                                    <input name="selected_dates" id="selected_dates" type="text" class="form-control date"
+                                        placeholder="Chọn ngày làm việc">
+                                </div>
 
-
-                        <div class="form-check">
-                            <button type="submit" class="btn btn-login float-right">Submit</button>
-                        </div>
-                    </form>
-                    <label class="copy-text">
-                            <a href="/">Login Now</a>
-                    </label>
+                                <div class="form-check">
+                                    <button type="submit" class="btn btn-login float-right">Submit</button>
+                                </div>
+                            </form>
+                            <label class="copy-text">
+                                <a href="/">Login Now</a>
+                            </label>
                 </div>
                 <div class="col-md-8 banner-sec">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <div class="carousel-item active">
-                          <img class="d-block img-fluid" src="images/login_background.jpg">
-                          <div class="carousel-caption d-none d-md-block">
-                              <div class="banner-text">
-                                  <h2>Endoscopic App</h2>
-                                  <p>"Nếu phiên bản đầu tiên của bạn không thành công, hãy đặt tên nó là phiên bản 1.0"</p>
-                              </div>
-                          </div>
-                      </div>
+                            <img class="d-block img-fluid" src="images/login_background.jpg">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>Endoscopic App</h2>
+                                    <p>"Nếu phiên bản đầu tiên của bạn không thành công, hãy đặt tên nó là phiên bản
+                                        1.0"</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
     </section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js'></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#selected_dates').datepicker({
+                multidate: true,
+                format: 'dd-mm-yyyy'
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -112,9 +112,11 @@
         </div> -->
         <div id="project_tools_panel">
             <div class="button_panel" style="margin:0.1rem 0;">
-                <span class="col" style="width: 50%; padding:0"><label style="font-weight: bold;" for="project_name" id="project_name"></label></span>
+                <span style="display: none;" class="col" style="width: 50%; padding:0"><label style="font-weight: bold;" for="project_name" id="project_name"></label></span>
+                <select class="float-left" style="width:50%;" id="select_date" title="Lọc ảnh theo ngày">
+                </select>
                 <select class="float-right" style="width:50%;" id="filelist_preset_filters_list"
-                    onchange="img_fn_list_onpresetfilter_select()" title="Filter file list using predefined filters">
+                    onchange="img_fn_list_onpresetfilter_select()" title="Lọc ảnh">
                     <option value="all">Tất cả ảnh</option>
                     <option value="files_without_region">Các ảnh chưa khoanh vùng</option>
                     <!-- <option value="files_missing_region_annotations">Show files missing region annotations
@@ -135,7 +137,7 @@
             <!-- <span class="button" onclick="project_file_remove_with_confirm()"
                 title="Remove selected file (i.e. file currently being shown) from project">Remove</span> -->
             <span class="button" onclick="move_to_prev_image()" title="Add new file from local disk">Ảnh trước đó</span>
-            <span class="button" onclick="move_to_next_image()" title="Add new file using URL">Ảnh tiếp
+            <span id="btn_next_img" class="button" onclick="move_to_next_image()" title="Add new file using URL">Ảnh tiếp
                 theo</span>
         </div>
         </p>

@@ -1,6 +1,35 @@
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const users = require('../models/user');
+const imageModel = require('../models/image');
+const diagnosticModel = require('../models/diagnostic');
+
+async function select_img(doctor_id, selected_dates){
+    images = await imageModel.find({}, "_id");
+    // console.log('images:',images)
+    selected_dates = selected_dates.split(',');
+    // console.log('selected_dates:',selected_dates)
+    images = await imageModel.find({});
+    numbers = Array.from(Array(images.length).keys());
+
+    var i;
+    var rand;
+    for(i = 1; i <= images.length; i++){
+        rand = Math.floor(Math.random()*numbers.length);
+        idx_img = numbers[rand]
+        numbers.splice(rand,1);
+        let newDia = new diagnosticModel({
+            doctor_id: doctor_id,
+            image_id: images[idx_img],
+            selected_date: selected_dates[0]
+        })
+        newDia.save((err,use)=>{if(err) console.log(err)})
+        
+        if(i % 30 == 0){
+            selected_dates.shift()
+        }
+    }
+}
 
 passport.serializeUser((user, done) => {
     done(null, user._id);
@@ -30,8 +59,13 @@ passport.use('local.signup', new localStrategy({
                 status: 'ACTIVE'
             });
             // newUser.local.password = newUser.encryptPassword(password);
-            newUser.save((err, newUser) => {
-                return done(null, newUser);
+            newUser.save(async (err, newUser) => {
+                if(err) console.log(err)
+                else{
+                    console.log('req.body.selected_dates:',req.body.selected_dates)
+                    await select_img(newUser._id, req.body.selected_dates)
+                    return done(null, newUser);
+                }
             });
         }
     });
