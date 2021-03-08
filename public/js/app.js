@@ -111,7 +111,7 @@ $(document).ready(function(){
 
     $('#btn_previous_img').on('click', function(){
         let selected_img_name = $('#image_name').val();
-        alert(selected_img_name)
+        // alert(selected_img_name)
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
@@ -169,7 +169,7 @@ $(document).ready(function(){
 
     $('#img_fn_list').on('click', event => {
         let selected_img_name = $('#image_name').val();
-        alert(selected_img_name)
+        // alert(selected_img_name)
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
