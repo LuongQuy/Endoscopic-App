@@ -94,6 +94,23 @@ $(document).ready(function(){
 
     $('#btn_next_img').on('click', function(){
         let selected_img_name = $('#image_name').val();
+        $('#image_name').val($('li.sel').text());
+
+        pack_via_metadata('json').then(function(data) {
+            saveSelectedArea({selected_area:data, image:selected_img_name})
+            .then(data => {
+                console.log(data);
+              });
+        });
+
+        writeLog({
+            action: 'click_next_image',
+            image: $('#image_name').val()
+        })
+    });
+
+    $('#btn_previous_img').on('click', function(){
+        let selected_img_name = $('#image_name').val();
         alert(selected_img_name)
         $('#image_name').val($('li.sel').text());
 
@@ -103,6 +120,69 @@ $(document).ready(function(){
                 console.log(data);
               });
         });
+
+        writeLog({
+            action: 'click_previous_image',
+            image: $('#image_name').val()
+        })
+    });
+
+    // write log
+
+    async function postData(url, data){
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+        return response.json();
+    }
+
+    async function writeLog(data){
+        return postData('/doctor/write-log', data)
+    }
+
+    $('.region_shape li').on('click', function(){
+        writeLog({
+            action: 'select_shape',
+            image: $('#image_name').val()
+        })
+    });
+
+    $('#region_canvas').on('click', function(){
+        writeLog({
+            action: 'click_on_image',
+            image: $('#image_name').val()
+        })
+    })
+
+    $('#region_canvas').on('keyup', function (event) {
+        if (event.keyCode === 13) {
+            writeLog({
+                action: 'enter_on_image',
+                image: $('#image_name').val()
+            })
+        }
+     });
+
+    $('#img_fn_list').on('click', event => {
+        let selected_img_name = $('#image_name').val();
+        alert(selected_img_name)
+        $('#image_name').val($('li.sel').text());
+
+        pack_via_metadata('json').then(function(data) {
+            saveSelectedArea({selected_area:data, image:selected_img_name})
+            .then(data => {
+                console.log(data);
+              });
+        });
+
+        writeLog({
+            action: 'click_select_image',
+            image: $('#image_name').val()
+        })
     });
 
 });

@@ -185,10 +185,9 @@ exports.saveSelectedArea = async (req, res) => {
     // let selected_area = JSON.parse(req.body.selected_area[0]);
     let selected_area = req.body.selected_area[0];
     let image_name = req.body.image;
-    image_name = image_name.substring(image_name.length, 4)
+    image_name = image_name.split(']')[1].substring(image_name.length, 1)
     console.log(image_name)
     let image = await imageModel.findOne({name:image_name});
-    console.log(image)
     let image_id = image._id;
 
     diagnosticModel.findOneAndUpdate({doctor_id: req.user._id, image_id: image_id}, {selected_area:selected_area}, (err, dia) =>{
@@ -201,4 +200,30 @@ exports.saveSelectedArea = async (req, res) => {
             })
         }
     });
+}
+
+const logModel = require('../../models/log');
+
+async function writeLog(log){
+    let newLog = new logModel(log);
+    newLog.save((err, newLog) => {
+        if(err) console.log(err)
+        else{
+            return newLog;
+        }
+    })
+}
+
+exports.writeLog = async (req, res) => {
+    let log = {
+        doctor_id: req.user._id,
+        action: req.body.action,
+        image: req.body.image
+    }
+    let data = await writeLog(log)
+    return res.json({
+        error: false,
+        message: '',
+        data: data
+    })
 }
