@@ -13,6 +13,6 @@ router.get('/get-images-by-date', authController.isLogged, authController.isDoct
 
 router.get('/get-selected-dates', authController.isLogged, authController.isDoctor, doctorController.getSelectedDates)
 
-router.get('/save-selected-area', doctorController.saveSelectedArea);
+router.post('/save-selected-area', doctorController.saveSelectedArea);
 
 module.exports = router;

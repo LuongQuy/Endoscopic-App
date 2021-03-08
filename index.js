@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(flash())
 
 // view engine setup
@@ -36,7 +37,7 @@ app.get('/', (req, res) => {
     return res.render('login')
 })
 
-mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 mongoose.connection.on('error', err => console.log(err));
 
 app.listen(config.server_port, () => console.log("Endoscopic Server start on port "+config.server_port))

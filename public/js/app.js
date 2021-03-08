@@ -25,6 +25,7 @@ $(document).ready(function(){
         if(data.error){
             console.log(data.message)
         }else{
+            $('#image_name').val(`[1] ${data.data[0].split('/')[2]}`);
             import_files_url_from_csv(data.data.join('\n'));
         }
     });
@@ -80,47 +81,28 @@ $(document).ready(function(){
             });
     })
 
-    function saveSelectedArea(data){
-        // const response = await fetch('/doctor/save-selected-area', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: data
-        //   });
-        // return response.json();
-
-        fetch('/doctor/save-selected-area', {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
-        })
-        .then(response => response.json()) 
-        .then(json => console.log(json))
-        .catch(err => console.log(err));
+    async function saveSelectedArea(data){
+        const response = await fetch('/doctor/save-selected-area', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+        return response.json();
     }
 
     $('#btn_next_img').on('click', function(){
-        fetch('/doctor/save-selected-area', {
-            method: "GET",
-            body: JSON.stringify({a:'b'}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-        })
-        .then(response => response.json()) 
-        .then(json => console.log(json))
-        .catch(err => console.log(err));
+        let selected_img_name = $('#image_name').val();
+        alert(selected_img_name)
+        $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            // console.log(JSON.stringify(data.join('')).replace('"',''))
-            // saveSelectedArea({selected_area:'data'})
-            // .then(data => {
-            //     console.log(data); // JSON data parsed by `data.json()` call
-            //   });
-            
+            saveSelectedArea({selected_area:data, image:selected_img_name})
+            .then(data => {
+                console.log(data);
+              });
         });
     });
 
-})
+});

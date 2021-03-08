@@ -180,20 +180,18 @@ exports.getSelectedDates = async (req, res) => {
     })
 }
 
-exports.saveSelectedArea = (req, res) => {
-    console.log(req.body)
-    let selected_area = req.body.a;
-    // let image_id = req.body.image_id;
-    // let doctor_id = req.user._id;
-    // console.log('selected_area:',selected_area)
+exports.saveSelectedArea = async (req, res) => {
+    // console.log(req.body[0])
+    // let selected_area = JSON.parse(req.body.selected_area[0]);
+    let selected_area = req.body.selected_area[0];
+    let image_name = req.body.image;
+    image_name = image_name.substring(image_name.length, 4)
+    console.log(image_name)
+    let image = await imageModel.findOne({name:image_name});
+    console.log(image)
+    let image_id = image._id;
 
-    return res.json({
-        error: false,
-        message: 'save successfully',
-        data: []
-    })
-
-    diagnosticModel.findOneAndUpdate({doctor_id: doctor_id, image_id: image_id}, {selected_area:selected_area}, (err, dia) =>{
+    diagnosticModel.findOneAndUpdate({doctor_id: req.user._id, image_id: image_id}, {selected_area:selected_area}, (err, dia) =>{
         if(err) console.log(err)
         else{
             return res.json({
