@@ -1,34 +1,8 @@
-const path = require('path')
-const imgFolder = path.join(__dirname, '../../public/images/demo')
-const fs = require('fs');
-
 const imageModel = require('../../models/image');
 const diagnosticModel = require('../../models/diagnostic');
 
-function create_img(imgPath, type, mode) {
-    fs.readdir(imgPath, (err, files) => {
-        if (err) console.log(err)
-        files.forEach(file => {
-            console.log(file);
-            let image = new imageModel({
-                name: file,
-                type: type,
-                mode: mode
-            });
-            image.save((err, result) => {
-                if (err) console.log(err)
-                else console.log(imgPath, '=> Done')
-            })
-        });
-    });
-}
-
 exports.getIndex = async (req, res) => {
     return res.render('doctor/work');
-}
-
-exports.getWork = (req, res) => {
-    return res.render('doctor/work')
 }
 
 async function checkValidDate(selected_date) {
@@ -145,25 +119,6 @@ exports.getImagesByDate = async (req, res) => {
             data: data
         });   
     }
-}
-
-exports.add_image = (req, res) => {
-    create_img(path.join(__dirname, 'images/LCI/normal'), 'normal', 'LCI');
-    create_img(path.join(__dirname, 'images/LCI/abnormal'), 'abnormal', 'LCI');
-
-    create_img(path.join(__dirname, 'images/LCI_FAKE/normal'), 'normal', 'LCI_FAKE');
-    create_img(path.join(__dirname, 'images/LCI_FAKE/abnormal'), 'abnormal', 'LCI_FAKE');
-
-    create_img(path.join(__dirname, 'images/FICE/normal'), 'normal', 'FICE');
-    create_img(path.join(__dirname, 'images/FICE/abnormal'), 'abnormal', 'FICE');
-
-    create_img(path.join(__dirname, 'images/FICE_FAKE/normal'), 'normal', 'FICE_FAKE');
-    create_img(path.join(__dirname, 'images/FICE_FAKE/abnormal'), 'abnormal', 'FICE_FAKE');
-
-    create_img(path.join(__dirname, 'images/WLI/normal'), 'normal', 'WLI');
-    create_img(path.join(__dirname, 'images/WLI/abnormal'), 'abnormal', 'WLI');
-
-    res.send('Done')
 }
 
 exports.getSelectedDates = async (req, res) => {

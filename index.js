@@ -10,6 +10,9 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const doctorRouter = require('./routes/doctor');
 
+const indexController = require('./controllers/indexController');
+const imageModel = require('./models/image')
+
 const app = express();
 app.use(session({
     secret: 'secret',
@@ -37,7 +40,13 @@ app.get('/', (req, res) => {
     return res.render('login')
 })
 
-mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
-mongoose.connection.on('error', err => console.log(err));
+const conn = mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connection.on('connected', function(){
+    imageModel.findOne({}, (err, result) => {
+        if(!result){
+            indexController.addImages();
+        }
+    })
+});
 
 app.listen(config.server_port, () => console.log("Endoscopic Server start on port "+config.server_port))

@@ -5,6 +5,9 @@ const diagnosticSchema = new Schema({
     doctor_id: {type: Schema.Types.ObjectId, ref: 'User'},
     image_id: {type: Schema.Types.ObjectId, ref: 'Image'},
     diagnostic_type: String,
+    // level: Int
+    start_time: Date,
+    end_time: Date,
     diagnostic_area: String,
     diagnostic_file: String,
     diagnostic_type_time: Date,
