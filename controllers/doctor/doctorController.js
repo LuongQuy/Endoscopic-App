@@ -19,26 +19,6 @@ async function checkValidDate(selected_date) {
     else return true;
 }
 
-async function getImages(doctor_id, selected_date) {
-    console.log(selected_date)
-    image_ids = await diagnosticModel.find({doctor_id:doctor_id, selected_date:selected_date}).populate('image_id')
-    console.log(image_ids)
-    images = await imageModel.find({selected_date:selected_date});
-    data = [];
-    numbers = Array.from(Array(images.length).keys())
-    var num_img = 5;
-    var i;
-    var rand;
-    for (i = 0; i < num_img; i++) {
-        rand = Math.floor(Math.random() * numbers.length); // random index of index of images
-        idx_img = numbers[rand];
-        data.push("images/endoscopic/" + images[idx_img].name);
-        numbers.splice(rand, 1);
-    }
-
-    return data.join("\n");
-}
-
 async function getImagesByDate(doctor_id, selected_date) {
     let dia = await diagnosticModel.find({doctor_id:doctor_id, selected_date:selected_date}, "image_id -_id").populate('image_id');
     let i;
@@ -95,7 +75,7 @@ async function getNearestDate(doctor_id){
 exports.getImages = async (req, res) => {
     let nearestDate = await getNearestDate(req.user._id);
     let data = await getImagesByDate(req.user._id, nearestDate);
-    console.log(data.length)
+
     return res.json({
         error: false,
         message: '',
@@ -135,9 +115,9 @@ exports.getSelectedDates = async (req, res) => {
     })
 }
 
-exports.saveSelectedArea = async (req, res) => {
-    // console.log(req.body[0])
-    // let selected_area = JSON.parse(req.body.selected_area[0]);
+exports.saveDiagnostic = async (req, res) => {
+    let img_type = req.body.img_type;
+    let img_level = req.body.img_level;
     let selected_area = req.body.selected_area[0];
     let image_name = req.body.image;
     image_name = image_name.split(']')[1].substring(image_name.length, 1)
@@ -145,7 +125,11 @@ exports.saveSelectedArea = async (req, res) => {
     let image = await imageModel.findOne({name:image_name});
     let image_id = image._id;
 
-    diagnosticModel.findOneAndUpdate({doctor_id: req.user._id, image_id: image_id}, {selected_area:selected_area}, (err, dia) =>{
+    diagnosticModel.findOneAndUpdate({doctor_id: req.user._id, image_id: image_id}, {
+        selected_area:selected_area,
+        img_type:img_type,
+        img_level:img_level
+    }, (err, dia) =>{
         if(err) console.log(err)
         else{
             return res.json({

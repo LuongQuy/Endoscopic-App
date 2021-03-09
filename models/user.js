@@ -14,9 +14,7 @@ const userSchema = new Schema({
 
         company: String,
         experience_time: String,
-        learning_endoscopic_time: String,
-        
-
+        learning_endoscopic_time: String
     },
     local: { // Use local
         email: String,

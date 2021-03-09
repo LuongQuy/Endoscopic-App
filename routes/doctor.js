@@ -13,7 +13,7 @@ router.get('/get-images-by-date', authController.isLogged, authController.isDoct
 
 router.get('/get-selected-dates', authController.isLogged, authController.isDoctor, doctorController.getSelectedDates)
 
-router.post('/save-selected-area', authController.isLogged, authController.isDoctor, doctorController.saveSelectedArea);
+router.post('/save-diagnostic', authController.isLogged, authController.isDoctor, doctorController.saveDiagnostic);
 
 router.post('/write-log', doctorController.writeLog);
 

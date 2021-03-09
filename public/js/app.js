@@ -81,8 +81,8 @@ $(document).ready(function(){
             });
     })
 
-    async function saveSelectedArea(data){
-        const response = await fetch('/doctor/save-selected-area', {
+    async function saveDiagnostic(data){
+        const response = await fetch('/doctor/save-diagnostic', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ $(document).ready(function(){
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveSelectedArea({selected_area:data, image:selected_img_name})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
             .then(data => {
                 console.log(data);
               });
@@ -115,7 +115,7 @@ $(document).ready(function(){
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveSelectedArea({selected_area:data, image:selected_img_name})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
             .then(data => {
                 console.log(data);
               });
@@ -173,7 +173,7 @@ $(document).ready(function(){
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveSelectedArea({selected_area:data, image:selected_img_name})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
             .then(data => {
                 console.log(data);
               });

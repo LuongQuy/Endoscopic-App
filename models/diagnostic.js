@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const diagnosticSchema = new Schema({
     doctor_id: {type: Schema.Types.ObjectId, ref: 'User'},
     image_id: {type: Schema.Types.ObjectId, ref: 'Image'},
-    diagnostic_type: String,
-    // level: Int
+    img_type: String,
+    img_level: Number,
     start_time: Date,
     end_time: Date,
     diagnostic_area: String,

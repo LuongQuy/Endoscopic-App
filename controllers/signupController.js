@@ -62,7 +62,6 @@ passport.use('local.signup', new localStrategy({
             newUser.save(async (err, newUser) => {
                 if(err) console.log(err)
                 else{
-                    console.log('req.body.selected_dates:',req.body.selected_dates)
                     await select_img(newUser._id, req.body.selected_dates)
                     return done(null, newUser);
                 }
