@@ -6,7 +6,7 @@ const diagnosticSchema = new Schema({
     image_id: {type: Schema.Types.ObjectId, ref: 'Image'},
     img_type: String,
     img_level: Number,
-    start_time: Date,
+    time: [{type: Date}],
     end_time: Date,
     diagnostic_area: String,
     diagnostic_file: String,

@@ -1,5 +1,7 @@
 const imageModel = require('../../models/image');
 const diagnosticModel = require('../../models/diagnostic');
+const path = require('path');
+const fs = require('fs');
 
 exports.getIndex = async (req, res) => {
     return res.render('doctor/work');
@@ -116,17 +118,36 @@ exports.getSelectedDates = async (req, res) => {
 }
 
 exports.saveDiagnostic = async (req, res) => {
-    let img_type = req.body.img_type;
+    // console.log(req.body)
+    let obj = {}
+    if(req.body.img_type){
+        obj['img_type'] = req.body.img_type;
+    }
+    if(req.body.img_level){
+        obj['img_level'] = req.body.img_level;
+    }
+    // if(req.body.selected_area){
+    //     obj['selected_area'] = req.body.selected_area;
+    // }
+    let data = JSON.stringify(JSON.parse(req.body.selected_area));
+    let dataPath = path.join(__dirname, 'data/',req.user.local.email,req.body.selected_date+'.json');
+    
+    fs.writeFile(dataPath, data, (err) => {
+        // if (err) throw err;
+        if(err){
+            console.log('Error!!!',err);
+        }
+    });
+
     let img_level = req.body.img_level;
-    let selected_area = req.body.selected_area[0];
+    // let selected_area = req.body.selected_area;
     let image_name = req.body.image;
     image_name = image_name.split(']')[1].substring(image_name.length, 1)
-    console.log(image_name)
     let image = await imageModel.findOne({name:image_name});
-    let image_id = image._id;
+    obj['image_id'] = image._id;
 
     diagnosticModel.findOneAndUpdate({doctor_id: req.user._id, image_id: image_id}, {
-        selected_area:selected_area,
+        // selected_area:selected_area,
         img_type:img_type,
         img_level:img_level
     }, (err, dia) =>{

@@ -106,3 +106,5 @@ dist
 public/images/endoscopic
 
 controllers/doctor/images
+
+controllers/doctor/data

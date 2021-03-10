@@ -3,6 +3,16 @@ const localStrategy = require('passport-local');
 const users = require('../models/user');
 const imageModel = require('../models/image');
 const diagnosticModel = require('../models/diagnostic');
+const fs = require('fs');
+const path = require('path');
+
+async function makeFolder(dir){
+    fs.mkdir(dir, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+}
 
 async function select_img(doctor_id, selected_dates){
     images = await imageModel.find({}, "_id");
@@ -51,6 +61,7 @@ passport.use('local.signup', new localStrategy({
             return done(null, false, {message: 'Email đã được sử dụng, vui lòng chọn email khác'})
         }else{
             let newUser = new users({
+                // fullname: req.body.fullname,
                 local: {
                     email: email,
                     password: password
@@ -63,6 +74,8 @@ passport.use('local.signup', new localStrategy({
                 if(err) console.log(err)
                 else{
                     await select_img(newUser._id, req.body.selected_dates)
+                    let dataPath = path.join(__dirname, 'doctor/data/'+email)
+                    await makeFolder(dataPath)
                     return done(null, newUser);
                 }
             });

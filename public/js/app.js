@@ -46,22 +46,6 @@ $(document).ready(function(){
         }
     });
 
-    async function remove_all_file() {
-        var img_id = Array.from(Array(5).keys());
-        console.log('_via_img_metadata[img_id]:',_via_img_metadata[img_id])
-        var filename = _via_img_metadata[img_id].filename;
-        
-        var region_count = _via_img_metadata[img_id].regions.length;
-      
-        var config = {'title':'Remove File from Project' };
-        var input = { 'img_index': { type:'text', name:'File Id', value:(_via_image_index+1), disabled:true, size:8 },
-                      'filename':{ type:'text', name:'Filename', value:filename, disabled:true, size:30},
-                      'region_count':{ type:'text', name:'Number of regions', disabled:true, value:region_count, size:8}
-                    };
-      
-        invoke_with_user_inputs(project_file_remove_confirmed, input, config);
-      }
-
     $('#select_date').on('change', () => {
         fetch('/doctor/get-images-by-date?selected_date=' + $('#select_date').val())
             .then(response => response.json())
@@ -92,12 +76,18 @@ $(document).ready(function(){
         return response.json();
     }
 
+    // saveDiagnostic({selected_area:data, 
+    //     image:selected_img_name, 
+    //     img_type: $('#img_type').val(), 
+    //     img_level: $('#img_level').val()})
+
     $('#btn_next_img').on('click', function(){
         let selected_img_name = $('#image_name').val();
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val(),
+            selected_date:$('#select_date').val()})
             .then(data => {
                 console.log(data);
               });
@@ -115,7 +105,8 @@ $(document).ready(function(){
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val(),
+            selected_date:$('#select_date').val()})
             .then(data => {
                 console.log(data);
               });
@@ -173,7 +164,8 @@ $(document).ready(function(){
         $('#image_name').val($('li.sel').text());
 
         pack_via_metadata('json').then(function(data) {
-            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val()})
+            saveDiagnostic({selected_area:data, image:selected_img_name, img_type: $('#img_type').val(), img_level: $('#img_level').val(),
+            selected_date:$('#select_date').val()})
             .then(data => {
                 console.log(data);
               });
